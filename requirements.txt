@@ -1,0 +1,29 @@
+# Flask web framework
+Flask==2.3.3
+
+# CORS support for Flask
+Flask-CORS==4.0.0
+
+# YouTube transcript extraction
+youtube-transcript-api==0.6.1
+
+# HTTP requests library
+requests==2.31.0
+
+# Optional: Performance and caching
+Flask-Caching==2.0.2
+Flask-Compress==1.13
+
+# Optional: Rate limiting
+Flask-Limiter==3.5.0
+
+# Optional: Security headers
+Flask-Talisman==1.1.0
+
+# Optional: Better JSON handling
+simplejson==3.19.1
+
+# Development dependencies (optional)
+# Uncomment for development
+# python-dotenv==1.0.0
+# flask-debugtoolbar==0.13.1
