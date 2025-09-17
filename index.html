@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مستخرج نصوص اليوتيوب</title>
-    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="استخرج النصوص والترجمة من أي فيديو يوتيوب مجاناً">
     <meta name="theme-color" content="#FF0000">
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
     
     <style>
         * {
@@ -206,7 +207,7 @@
         .timestamp {
             color: #667eea;
             font-weight: 600;
-            margin-right: 10px;
+            margin-left: 10px;
         }
 
         .action-buttons {
@@ -253,29 +254,6 @@
             background: #c82333;
         }
 
-        .history-section {
-            margin-top: 30px;
-        }
-
-        .history-item {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-right: 4px solid #667eea;
-        }
-
-        .history-item .title {
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .history-item .date {
-            color: #666;
-            font-size: 14px;
-        }
-
         .error-message {
             background: #f8d7da;
             color: #721c24;
@@ -294,23 +272,40 @@
             display: none;
         }
 
-        .install-prompt {
+        .info-box {
             background: #e7f3ff;
             border: 1px solid #b3d4fc;
             border-radius: 10px;
-            padding: 15px;
+            padding: 20px;
             margin-bottom: 20px;
-            display: none;
+            text-align: center;
         }
 
-        .install-prompt button {
-            background: #007bff;
+        .info-box h3 {
+            color: #0366d6;
+            margin-bottom: 10px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .feature-card .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
         }
 
         @media (max-width: 768px) {
@@ -337,6 +332,22 @@
             margin-top: 40px;
             opacity: 0.8;
         }
+
+        .github-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -346,14 +357,38 @@
             <p>استخرج النصوص والترجمة من أي فيديو يوتيوب مجاناً</p>
         </div>
 
-        <div class="install-prompt" id="installPrompt">
-            <h3>📱 تثبيت التطبيق</h3>
-            <p>يمكنك تثبيت هذا التطبيق على جهازك للوصول السريع</p>
-            <button onclick="installApp()">تثبيت التطبيق</button>
-            <button onclick="hideInstallPrompt()" style="background: #6c757d; margin-right: 10px;">إغلاق</button>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon">🚀</div>
+                <h3>سريع ومجاني</h3>
+                <p>استخراج فوري بدون قيود</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">⏰</div>
+                <h3>مع التوقيتات</h3>
+                <p>نصوص مع أوقاتها الدقيقة</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🌍</div>
+                <h3>متعدد اللغات</h3>
+                <p>دعم أكثر من 20 لغة</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">💾</div>
+                <h3>تحميل متنوع</h3>
+                <p>TXT, SRT وصيغ أخرى</p>
+            </div>
         </div>
 
         <div class="main-card">
+            <div class="info-box">
+                <h3>⚠️ إشعار مهم</h3>
+                <p>هذا إصدار تجريبي يعمل على GitHub Pages. للحصول على الوظائف الكاملة، يرجى تشغيل النسخة المحلية مع خادم Python.</p>
+                <a href="https://github.com/ayedalhammad/youtube-transcript-extractor" target="_blank" class="github-link">
+                    📖 دليل التثبيت على GitHub
+                </a>
+            </div>
+
             <div class="input-section">
                 <div class="input-group">
                     <label for="videoUrl">رابط فيديو اليوتيوب:</label>
@@ -392,7 +427,7 @@
                 </div>
 
                 <button class="extract-btn" id="extractBtn" onclick="extractTranscript()">
-                    🚀 استخراج النص
+                    🚀 استخراج النص (تجريبي)
                 </button>
 
                 <div class="error-message" id="errorMessage"></div>
@@ -400,7 +435,7 @@
 
                 <div class="loading" id="loadingDiv">
                     <div class="spinner"></div>
-                    <p>جاري استخراج النص...</p>
+                    <p>جاري محاولة استخراج النص...</p>
                 </div>
             </div>
         </div>
@@ -428,57 +463,22 @@
             </div>
         </div>
 
-        <div class="main-card history-section" id="historySection">
-            <h2>📚 السجل</h2>
-            <div id="historyList"></div>
-        </div>
-
         <div class="footer">
-            <p>© 2025 مستخرج نصوص اليوتيوب - تطوير خاص</p>
+            <p>© 2025 مستخرج نصوص اليوتيوب - مشروع مفتوح المصدر</p>
+            <a href="https://github.com/ayedalhammad/youtube-transcript-extractor" target="_blank" class="github-link">
+                ⭐ GitHub Repository
+            </a>
         </div>
     </div>
 
     <script>
-        let deferredPrompt;
         let currentTranscript = null;
         let currentVideoInfo = null;
 
-        // PWA Installation
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            showInstallPrompt();
-        });
-
-        function showInstallPrompt() {
-            document.getElementById('installPrompt').style.display = 'block';
-        }
-
-        function hideInstallPrompt() {
-            document.getElementById('installPrompt').style.display = 'none';
-        }
-
-        async function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    hideInstallPrompt();
-                }
-                deferredPrompt = null;
-            }
-        }
-
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-
-        // YouTube API Integration (Simplified version using CORS proxy)
+        // استخراج النص (نسخة تجريبية)
         async function extractTranscript() {
             const videoUrl = document.getElementById('videoUrl').value.trim();
             const includeTimestamps = document.getElementById('includeTimestamps').checked;
-            const language = document.getElementById('languageSelect').value;
 
             if (!videoUrl) {
                 showError('يرجى إدخال رابط الفيديو');
@@ -495,20 +495,51 @@
             clearMessages();
 
             try {
-                // Using youtube-transcript-api through a CORS proxy
-                const transcript = await fetchTranscript(videoId, language);
-                const videoInfo = await fetchVideoInfo(videoId);
-                
-                displayResults(transcript, videoInfo, includeTimestamps);
-                saveToHistory(videoInfo, transcript);
-                showSuccess('تم استخراج النص بنجاح!');
+                // محاولة استخدام API خارجي مجاني (تجريبي)
+                await attemptExternalAPI(videoId, includeTimestamps);
                 
             } catch (error) {
                 console.error('Error:', error);
-                showError('فشل في استخراج النص. تأكد من أن الفيديو يحتوي على ترجمة.');
+                showError('عذراً، الاستخراج غير متوفر في هذا الإصدار. يرجى استخدام النسخة المحلية مع Python للحصول على الوظائف الكاملة.');
+                
+                // عرض معلومات تجريبية
+                showDemoData(videoUrl, includeTimestamps);
             } finally {
                 showLoading(false);
             }
+        }
+
+        // محاولة API خارجي (قد يفشل بسبب CORS)
+        async function attemptExternalAPI(videoId, includeTimestamps) {
+            // هذا مجرد مثال - قد لا يعمل بسبب CORS
+            throw new Error('External API not available in static hosting');
+        }
+
+        // عرض بيانات تجريبية
+        function showDemoData(videoUrl, includeTimestamps) {
+            const videoId = extractVideoId(videoUrl);
+            
+            // بيانات تجريبية
+            const demoVideoInfo = {
+                title: "فيديو يوتيوب (عرض تجريبي)",
+                channel: "قناة تجريبية",
+                duration: "5:30",
+                views: "1,234,567",
+                thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
+            };
+
+            const demoTranscript = [
+                { text: "هذا نص تجريبي لعرض كيفية عمل التطبيق", start: 0, duration: 3 },
+                { text: "في النسخة الكاملة، ستحصل على النص الحقيقي", start: 3, duration: 4 },
+                { text: "يرجى استخدام النسخة المحلية للوظائف الكاملة", start: 7, duration: 4 },
+                { text: "تابع التعليمات في GitHub لتثبيت النسخة الكاملة", start: 11, duration: 5 }
+            ];
+
+            currentTranscript = demoTranscript;
+            currentVideoInfo = demoVideoInfo;
+            
+            displayResults(demoTranscript, demoVideoInfo, includeTimestamps);
+            showSuccess('تم عرض بيانات تجريبية - للحصول على النص الحقيقي، استخدم النسخة المحلية');
         }
 
         function extractVideoId(url) {
@@ -517,52 +548,22 @@
             return match ? match[1] : null;
         }
 
-        async function fetchTranscript(videoId, language = 'en') {
-            // This is a simplified version. In a real implementation, you would need:
-            // 1. A backend server to fetch YouTube captions
-            // 2. Or use a service like RapidAPI for YouTube transcripts
-            
-            // For demonstration, we'll simulate the API call
-            return simulateTranscriptFetch(videoId, language);
-        }
-
-        async function simulateTranscriptFetch(videoId, language) {
-            // Simulated transcript data - in real implementation, this would come from YouTube API
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API delay
-            
-            return [
-                { text: "مرحباً بكم في هذا الفيديو", start: 0, duration: 3 },
-                { text: "سنتحدث اليوم عن موضوع مهم", start: 3, duration: 4 },
-                { text: "أتمنى أن ينال إعجابكم", start: 7, duration: 3 },
-                { text: "لا تنسوا الاشتراك في القناة", start: 10, duration: 4 },
-                { text: "وتفعيل جرس التنبيهات", start: 14, duration: 3 }
-            ];
-        }
-
-        async function fetchVideoInfo(videoId) {
-            // Simulated video info - in real implementation, this would come from YouTube API
-            return {
-                title: "عنوان الفيديو التجريبي",
-                channel: "اسم القناة",
-                duration: "5:30",
-                views: "1,234,567"
-            };
-        }
-
         function displayResults(transcript, videoInfo, includeTimestamps) {
-            currentTranscript = transcript;
-            currentVideoInfo = videoInfo;
-
-            // Display video info
+            // عرض معلومات الفيديو
             const videoInfoDiv = document.getElementById('videoInfo');
             videoInfoDiv.innerHTML = `
-                <h3>${videoInfo.title}</h3>
-                <div class="info-item"><strong>القناة:</strong> ${videoInfo.channel}</div>
-                <div class="info-item"><strong>المدة:</strong> ${videoInfo.duration}</div>
-                <div class="info-item"><strong>المشاهدات:</strong> ${videoInfo.views}</div>
+                <div style="display: flex; gap: 20px; align-items: start;">
+                    <img src="${videoInfo.thumbnail}" alt="Video thumbnail" style="width: 120px; height: 90px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'">
+                    <div style="flex: 1;">
+                        <h3 style="margin-bottom: 10px; color: #333;">${videoInfo.title}</h3>
+                        <div class="info-item"><strong>القناة:</strong> ${videoInfo.channel}</div>
+                        <div class="info-item"><strong>المدة:</strong> ${videoInfo.duration}</div>
+                        <div class="info-item"><strong>المشاهدات:</strong> ${videoInfo.views}</div>
+                    </div>
+                </div>
             `;
 
-            // Display transcript
+            // عرض النص
             const transcriptDiv = document.getElementById('transcriptText');
             let transcriptText = '';
 
@@ -577,33 +578,50 @@
 
             transcriptDiv.innerHTML = transcriptText;
             
-            // Show results section
+            // عرض النتائج
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
 
         function formatTimestamp(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
+            const minutes = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
-            
-            if (hours > 0) {
-                return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            }
             return `${minutes}:${secs.toString().padStart(2, '0')}`;
         }
 
         function copyTranscript() {
             const transcriptText = document.getElementById('transcriptText').innerText;
-            navigator.clipboard.writeText(transcriptText).then(() => {
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(transcriptText).then(() => {
+                    showSuccess('تم نسخ النص بنجاح!');
+                }).catch(() => {
+                    fallbackCopy(transcriptText);
+                });
+            } else {
+                fallbackCopy(transcriptText);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
                 showSuccess('تم نسخ النص بنجاح!');
-            }).catch(() => {
+            } catch (err) {
                 showError('فشل في نسخ النص');
-            });
+            }
+            document.body.removeChild(textArea);
         }
 
         function downloadTranscript(format) {
-            if (!currentTranscript || !currentVideoInfo) return;
+            if (!currentTranscript || !currentVideoInfo) {
+                showError('لا يوجد نص لتحميله');
+                return;
+            }
 
             let content = '';
             let filename = '';
@@ -611,6 +629,11 @@
 
             if (format === 'txt') {
                 const includeTimestamps = document.getElementById('includeTimestamps').checked;
+                
+                content += `العنوان: ${currentVideoInfo.title}\n`;
+                content += `القناة: ${currentVideoInfo.channel}\n`;
+                content += `${'-'.repeat(50)}\n\n`;
+                
                 currentTranscript.forEach(item => {
                     if (includeTimestamps) {
                         content += `[${formatTimestamp(item.start)}] ${item.text}\n\n`;
@@ -618,7 +641,8 @@
                         content += `${item.text} `;
                     }
                 });
-                filename = `${currentVideoInfo.title.replace(/[^a-zA-Z0-9]/g, '_')}.txt`;
+                
+                filename = `transcript.txt`;
                 mimeType = 'text/plain';
                 
             } else if (format === 'srt') {
@@ -627,7 +651,7 @@
                     const endTime = formatSRTTimestamp(item.start + item.duration);
                     content += `${index + 1}\n${startTime} --> ${endTime}\n${item.text}\n\n`;
                 });
-                filename = `${currentVideoInfo.title.replace(/[^a-zA-Z0-9]/g, '_')}.srt`;
+                filename = `transcript.srt`;
                 mimeType = 'application/x-subrip';
             }
 
@@ -638,6 +662,8 @@
             a.download = filename;
             a.click();
             URL.revokeObjectURL(url);
+            
+            showSuccess(`تم تحميل ${filename}`);
         }
 
         function formatSRTTimestamp(seconds) {
@@ -656,45 +682,6 @@
             currentVideoInfo = null;
         }
 
-        function saveToHistory(videoInfo, transcript) {
-            const history = getHistory();
-            const historyItem = {
-                id: Date.now(),
-                date: new Date().toLocaleString('ar-EG'),
-                title: videoInfo.title,
-                channel: videoInfo.channel,
-                transcript: transcript
-            };
-            
-            history.unshift(historyItem);
-            if (history.length > 10) history.pop(); // Keep only last 10 items
-            
-            localStorage.setItem('transcriptHistory', JSON.stringify(history));
-            displayHistory();
-        }
-
-        function getHistory() {
-            const history = localStorage.getItem('transcriptHistory');
-            return history ? JSON.parse(history) : [];
-        }
-
-        function displayHistory() {
-            const history = getHistory();
-            const historyList = document.getElementById('historyList');
-            
-            if (history.length === 0) {
-                historyList.innerHTML = '<p>لا يوجد سجل بعد</p>';
-                return;
-            }
-            
-            historyList.innerHTML = history.map(item => `
-                <div class="history-item">
-                    <div class="title">${item.title}</div>
-                    <div class="date">${item.date} - ${item.channel}</div>
-                </div>
-            `).join('');
-        }
-
         function showLoading(show) {
             const loadingDiv = document.getElementById('loadingDiv');
             const extractBtn = document.getElementById('extractBtn');
@@ -707,18 +694,14 @@
             const errorDiv = document.getElementById('errorMessage');
             errorDiv.textContent = message;
             errorDiv.style.display = 'block';
-            setTimeout(() => {
-                errorDiv.style.display = 'none';
-            }, 5000);
+            setTimeout(() => errorDiv.style.display = 'none', 8000);
         }
 
         function showSuccess(message) {
             const successDiv = document.getElementById('successMessage');
             successDiv.textContent = message;
             successDiv.style.display = 'block';
-            setTimeout(() => {
-                successDiv.style.display = 'none';
-            }, 3000);
+            setTimeout(() => successDiv.style.display = 'none', 4000);
         }
 
         function clearMessages() {
@@ -726,23 +709,16 @@
             document.getElementById('successMessage').style.display = 'none';
         }
 
-        // Initialize
+        // تهيئة التطبيق
         document.addEventListener('DOMContentLoaded', function() {
-            displayHistory();
+            console.log('🎬 YouTube Transcript Extractor - GitHub Pages Version');
             
-            // Auto-detect language based on browser
-            const browserLang = navigator.language.split('-')[0];
-            const langSelect = document.getElementById('languageSelect');
-            if (langSelect.querySelector(`option[value="${browserLang}"]`)) {
-                langSelect.value = browserLang;
-            }
-        });
-
-        // Handle Enter key in URL input
-        document.getElementById('videoUrl').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                extractTranscript();
-            }
+            // معالجة Enter في حقل الرابط
+            document.getElementById('videoUrl').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    extractTranscript();
+                }
+            });
         });
     </script>
 </body>
